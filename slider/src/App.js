@@ -3,16 +3,22 @@ import logo from './logo.svg';
 import './App.css';
 
 import Grid from 'react-bootstrap/lib/Grid';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
+
 import styled from 'styled-components';
+
+import Header from './components/Header'
+import Main from './components/Main'
+import Menu from './components/Menu'
 
 class App extends Component {
   render() {
     return (
-    <div className="wrapper">
-      <SayFullName name='Андрей' surname='Тарасенко' link='#'/>
+    <div className="App">
+      <Header />
+      <Menu />
+      <Main />
     </div>
+
     );
   }
 }
