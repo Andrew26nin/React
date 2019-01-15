@@ -17,6 +17,7 @@ span {
     line-height:30px;
 }
 `
+console.log(Repair);
 const LightText = styled.div`
 color: #ffffff;
 margin-top:54px;
