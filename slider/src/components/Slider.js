@@ -1,86 +1,92 @@
-import React, { Component} from 'react';
+import React, { Component } from "react";
 
-import Slide_1 from '../img/slide1.png';
-import Slide_2 from '../img/slide2.png';
-import Slide_3 from '../img/slide3.png';
-import Slide_4 from '../img/slide4.png';
+import Slide_1 from "../img/slide1.png";
+import Slide_2 from "../img/slide2.png";
+import Slide_3 from "../img/slide3.png";
+import Slide_4 from "../img/slide4.png";
 
-class Slider extends React.Component{
-    constructor(props){
-        super(props);
-        this.state={
-            slides:[
-                {
-                    eachSlide: `url(${Slide_1})`
-                },
-                {
-                    eachSlide: `url(${Slide_2})`
-                },
-                {
-                    eachSlide: `url(${Slide_3})`
-                },
-                {
-                    eachSlide: `url(${Slide_4})`
-                }
-            ],
-            autoplay:false,
-            active:0,
-            max:0
+class Slider extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      slides: [
+        {
+          eachSlide: `url(${Slide_1})`
+        },
+        {
+          eachSlide: `url(${Slide_2})`
+        },
+        {
+          eachSlide: `url(${Slide_3})`
+        },
+        {
+          eachSlide: `url(${Slide_4})`
         }
-        
-        this.state.max=this.state.slides.length;
-        this.intervalBetweenSlides=this.intervalBetweenSlides.bind(this);
-    this.toggleAutoPlay=this.toggleAutoPlay.bind(this);
-    this.nextOne=this.nextOne.bind(this);
-    this.prevOne=this.prevOne.bind(this);
-    }
-        componentDidMount(){
-        this.interval=setInterval(()=>this.intervalBetweenSlides(), 3000);
-                        }
-    componentWillUnmount(){
-        clearInterval(this.interval);
+      ],
+      autoplay: false,
+      active: 0,
+      max: 0
+    };
 
-    }
+    this.state.max = this.state.slides.length;
+    this.intervalBetweenSlides = this.intervalBetweenSlides.bind(this);
+    this.toggleAutoPlay = this.toggleAutoPlay.bind(this);
+    this.nextOne = this.nextOne.bind(this);
+    this.prevOne = this.prevOne.bind(this);
+  }
+  componentDidMount() {
+    this.interval = setInterval(() => this.intervalBetweenSlides(), 3000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
 
-    intervalBetweenSlides(){
-        if(this.state.autoplay===true){
-            if(this.state.active===this.state.max-1) {
-                this.state.active=0;
-            } else{
-                this.active++;
-            }
+  intervalBetweenSlides() {
+    if (this.state.autoplay === true) {
+      if (this.state.active === this.state.max - 1) {
+        this.state.active = 0;
+      } else {
+        this.active++;
+      }
 
-            this.setState({
-                active: this.state.active
-            })
-        }
+      this.setState({
+        active: this.state.active
+      });
     }
-    toggleAutoPlay() {
-        this.setState({
-            autoplay: !this.state.autoplay
+  }
+  toggleAutoPlay() {
+    this.setState({
+      autoplay: !this.state.autoplay
+    });
+  }
+
+  nextOne() {
+    this.state.active < this.state.max - 1
+      ? this.setState({
+          active: this.state.active + 1
         })
+      : this.setState({
+          active: 0
+        });
+  }
+
+  prevOne() {
+    this.state.active > 0
+      ? this.setState({
+          active: this.state.active - 1
+        })
+      : this.setState({
+          active: this.state.max - 1
+        });
+  }
+  dots(index, event) {
+    this.setState({
+      active: index
+    });
+  }
+  isActive(value) {
+    if (this.state.active === value) {
+      return "active";
     }
-
-nextOne(){
-
-    (this.state.active<this.state.max-1)?
-    this.setState({
-        active:this.state.active+1
-    }):
-    this.setState({
-        active:0
-    })
-}
-
-prevOne(){
-(this.state.active>0)?
-this.setState({
-    active:this.state.active-1
-}):
-this.setState({
-    active:this.state.max-1
-})
-
-}
-
+  }
 }
